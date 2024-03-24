@@ -1,0 +1,198 @@
+/* Global */
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
+:root {
+  --success-color: #16ba89;
+  --warning-color: #f99c15;
+  --danger-color: #f44134;
+  --secondary-color: #9fa6b2;
+  --dark-color: #262d3c;
+  /* === Regular Colors */
+  --white-color: #fff;
+  --black-color: #000;
+  --gray-color: #777;
+  /* === Transition === */
+  --transition: all 0.3s ease;
+}
+::selection {
+  background-color: var(--dark-color);
+  color: var(--success-color);
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+html {
+  scroll-behavior: smooth;
+}
+body {
+  min-height: 100dvh;
+  font-family: "Roboto", sans-serif;
+}
+li {
+  list-style: none;
+}
+button {
+  user-select: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  user-select: none;
+  transition: var(--transition);
+}
+button:hover {
+  scale: 0.989;
+}
+button.disabled:hover {
+  scale: 1;
+}
+/* \--> Main <---/ */
+header,
+footer {
+  min-height: 65px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: default;
+}
+/* Header */
+header {
+  background-color: var(--white-color);
+  font-size: 27px;
+}
+/* Main */
+main {
+  padding: 28px 46px;
+  min-height: calc(100dvh - (65px * 2));
+  width: 100%;
+  background-color: var(--secondary-color);
+  display: grid;
+  grid-template-columns: 875px 1fr;
+  gap: 32px;
+  /* Nested */
+  > div {
+    text-align: center;
+  }
+  div.play-section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 12px;
+    div {
+      user-select: none;
+      flex: 1;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      h3 {
+        min-width: 126px;
+        font-size: 54px;
+      }
+      input {
+        border: none;
+        outline: none;
+        max-height: 100%;
+        max-width: 116px;
+        font-size: 100px;
+        text-align: center;
+        caret-color: transparent;
+        border-bottom: 4px solid var(--dark-color);
+      }
+      input:focus {
+        outline: 2px solid var(--dark-color);
+      }
+    }
+    div.buttons {
+      min-height: 119.5px;
+      display: flex;
+      align-items: center;
+      text-align: center;
+      gap: 18px;
+      button {
+        min-height: 119.5px;
+        font-size: 26px;
+        font-weight: 700;
+        color: var(--white-color);
+        border-radius: 6px;
+      }
+      button:first-child {
+        flex: 1;
+        background-color: var(--danger-color);
+      }
+      button:last-child {
+        min-width: 260px;
+        background-color: var(--success-color);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 6px;
+      }
+    }
+    div:not(:last-child).disabled {
+      opacity: 0.5;
+      pointer-events: none;
+    }
+  }
+  div.info-section {
+    h3 {
+      font-size: 42px;
+      cursor: default;
+    }
+    ul {
+      margin-top: 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      li {
+        padding: 14px 16px;
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        background-color: var(--white-color);
+        div.color {
+          height: 46px;
+          width: 46px;
+        }
+        p {
+          font-size: 26px;
+          font-weight: 700;
+          cursor: default;
+        }
+      }
+    }
+  }
+}
+/* Footer */
+footer {
+  color: var(--white-color);
+  background-color: var(--dark-color);
+  font-size: 24px;
+  font-weight: 500;
+  cursor: default;
+
+  a {
+    text-decoration: none;
+    margin-left: 10px;
+    scale: 1.09;
+    cursor: pointer;
+    color: var(--white-color);
+    transition: var(--transition);
+  }
+  a:hover {
+    scale: 1;
+    color: var(--success-color);
+  }
+}
+/* ====== max-Media ====== */
+@media (max-width: 1368px) {
+  main {
+    display: flex;
+    flex-direction: column;
+
+    .play-section {
+      order: 2;
+      max-width: 875px;
+      align-self: center;
+    }
+  }
+}
