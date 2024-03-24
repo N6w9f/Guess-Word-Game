@@ -18,6 +18,7 @@ for (let i = 0; i < tries; i++) {
 
   const h3 = document.createElement("h3");
   h3.textContent = `Try ${i + 1}`;
+  h3.setAttribute("data-type", "h3");
   tryDiv.append(h3);
 
   for (let i = 0; i < inputs; i++) {
@@ -153,6 +154,7 @@ function checkButton() {
       }
     }
     activeLine++;
+    playSection.children[activeLine].children[1].focus();
     if (activeLine == tries) {
       check.classList.add("disabled");
       hint.classList.add("disabled");
@@ -161,6 +163,7 @@ function checkButton() {
       playSection.children[tries - 1].style.opacity = 0.5;
       playSection.style.opacity = 0.5;
       playSection.style.pointerEvents = "none";
+      activeLine = null;
     }
     disabled();
   }
@@ -205,9 +208,44 @@ function disabled() {
     }
   }
 }
-function inputsEvent() {}
+let allInputs = [...document.querySelectorAll(".play-section div input")];
+allInputs.forEach((ele) => {
+  ele.addEventListener("keyup", (event) => {
+    if (
+      event.code.toUpperCase() == "Space".toUpperCase() ||
+      event.code.toUpperCase() == "ArrowRight".toUpperCase() ||
+      event.code.toUpperCase() == "Enter".toUpperCase()
+    ) {
+      if (ele.nextElementSibling !== null) {
+        ele.nextElementSibling.focus();
+      } else {
+        if (event.code == "Enter" || event.code == "Space") {
+          if (activeLine !== null) {
+            check.click();
+            playSection.children[activeLine].children[1].focus();
+          }
+        }
+      }
+    } else if (
+      event.code.toUpperCase() == "ArrowLeft".toUpperCase() ||
+      event.code.toUpperCase() == "Backspace".toUpperCase()
+    ) {
+      if (ele.previousElementSibling.dataset.type !== "h3") {
+        ele.previousElementSibling.focus();
+      }
+    } else if (event.code.toUpperCase() == "Backspace".toUpperCase()) {
+      if (ele.value == "") {
+        if (ele.previousElementSibling.dataset.type !== "h3") {
+          ele.previousElementSibling.focus();
+          ele.previousElementSibling.value == "";
+        }
+      } else {
+        ele.previousElementSibling.value == "";
+      }
+    }
+  });
+});
 /* Footer */
 const footer = `Copyrights &copy; All Rights Reserved <a href="https://github.com/N6w9f">Nawaf</a>`;
 document.querySelector("footer").innerHTML = footer;
-
-console.log(wordGenerator)
+console.log(wordGenerator);
